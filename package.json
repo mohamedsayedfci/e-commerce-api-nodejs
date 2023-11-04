@@ -1,0 +1,29 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "An e-commerce  application",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "env-cmd -f ./config/dev.env nodemon app.js",
+    "start": "node app.js"
+  },
+  "author": "Mohamed Sayed",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.17.1",
+    "flutterwave-node-v3": "^1.0.9",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.5",
+    "stripe": "^8.193.0",
+    "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "nodemon": "^2.0.22"
+  }
+}
