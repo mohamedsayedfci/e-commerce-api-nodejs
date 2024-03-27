@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('../partials/header'); %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h1>This is great</h1>
+        <p>Welcome to templating using EJS</p>
+
+        <h2>Variable</h2>
+        <p><%= title %></p>
+
+        <dev class="row">
+            <% items.forEach(function(item) { %>
+
+
+                <div class="card col-4">
+                    <div class="card-header"><%= item.name %></div>
+                    <div class="card-body"><%= item.description %></div>
+                    <div class="card-footer"><%= item.price %> $ </div>
+                </div>
+            <% }); %>
+        </dev>
+    </div>
+</main>
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

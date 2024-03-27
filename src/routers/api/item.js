@@ -1,8 +1,8 @@
 const express = require('express')
 const router = new express.Router()
-const Item = require('../models/Item')
-const Auth = require('../middleware/auth')
-const itemController = require('../Controllers/ItemContrroler')
+const Item = require('../../models/Item')
+const Auth = require('../../middleware/auth')
+const itemController = require('../../Controllers/Api/ItemContrroler')
 
 //fetch all items
 router.get('/items', Auth,itemController.index)

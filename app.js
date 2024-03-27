@@ -1,18 +1,29 @@
 const express = require('express')
 const path = require('path');
-const userRouter = require('./src/routers/user')
-const itemRouter =require('./src/routers/item')
-const cartRouter = require('./src/routers/cart')
-const orderRouter = require('./src/routers/order')
+const userRouter = require('./src/routers/api/user')
+const itemRouter =require('./src/routers/api/item')
+const cartRouter = require('./src/routers/api/cart')
+const orderRouter = require('./src/routers/api/order')
+// const webRouter = require('./src/routers/web')
 require('./src/db/mongoose')
 
-const port = process.env.PORT
+
+
+const port = process.env.PORT||3000
+const homeController = require('./src/Controllers/HomeContrroler')
 
 const app = express()
+// set the view engine to ejs
+app.set('view engine', 'ejs');
 
+// use res.render to load up an ejs view file
 app.use(express.json())
+const web = express.Router()
 const router = express.Router()
+app.get('/index',homeController.index)
 
+// web.use(webRouter)
+//api
 router.use(userRouter)
 router.use(itemRouter)
 router.use(cartRouter)

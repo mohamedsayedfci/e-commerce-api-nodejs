@@ -1,11 +1,11 @@
 const express = require("express")
 const Flutterwave = require("flutterwave-node-v3")
-const Order = require("../models/Order")
-const Cart = require("../models/Cart")
-const User = require("../models/User")
-const Auth = require("../middleware/auth")
+const Order = require("../../models/Order")
+const Cart = require("../../models/Cart")
+const User = require("../../models/User")
+const Auth = require("../../middleware/auth")
 
-const response = require("../Helpers/Response");
+const response = require("../../Helpers/Response");
 
 
 

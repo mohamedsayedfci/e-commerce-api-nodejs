@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const User = require('../models/User');
-const response = require("../Helpers/Response");
+const User = require('../../models/User');
+const response = require("../../Helpers/Response");
 require('dotenv').config();
 
 // Register a new user
