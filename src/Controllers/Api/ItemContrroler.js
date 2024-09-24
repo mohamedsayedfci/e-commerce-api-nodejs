@@ -1,7 +1,6 @@
 //fetch all items
 const Auth = require("../../middleware/auth");
 const Item = require("../../models/Item");
-const response = require("../../Helpers/Response");
 const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -10,16 +9,16 @@ exports.index = async (req, res) => {
     if (req.query.user == 1) {
         try {
             const items = await Item.find({owner: req.user._id})
-            response.sendResponse(res,items)
+           res.sendResponse(items)
         } catch (error) {
-            response.sendError(res,error, 400)
+            res.sendError(error, 400)
         }
     } else {
         try {
             const items = await Item.find({})
-            response.sendResponse(res,items)
+           res.sendResponse(items)
         } catch (error) {
-            response.sendError(res,error, 400)
+            res.sendError(error, 400)
         }
     }
 }
@@ -29,11 +28,11 @@ exports.show = async (req, res) => {
     try {
         const item = await Item.findOne({_id: req.params.id})
         if (!item) {
-            response.sendError(res,"Item not found")
+            res.sendError("Item not found")
         }
-        response.sendResponse(res,item)
+       res.sendResponse(item)
     } catch (error) {
-        response.sendError(res,error)
+        res.sendError(error)
     }
 }
 
@@ -59,10 +58,10 @@ exports.store = async (req, res) => {
             owner: req.user._id
         })
         await newItem.save()
-        response.sendResponse(res,newItem)
+       res.sendResponse(newItem)
     } catch (error) {
         console.log({error})
-        response.sendError(res,error, 400)
+        res.sendError(error, 400)
     }
 }
 
@@ -75,7 +74,7 @@ exports.upadte = async (req, res) => {
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if (!isValidOperation) {
-        response.sendError(res,"validation error")
+        res.sendError("validation error")
 
     }
 
@@ -83,14 +82,14 @@ exports.upadte = async (req, res) => {
         const item = await Item.findOne({_id: req.params.id})
 
         if (!item) {
-            response.sendError(res,"not found")
+            res.sendError("not found")
         }
 
         updates.forEach((update) => item[update] = req.body[update])
         await item.save()
-        response.sendResponse(res,item)
+       res.sendResponse(item)
     } catch (error) {
-        response.sendError(res,error)
+        res.sendError(error)
     }
 }
 
@@ -99,10 +98,10 @@ exports.delete = async (req, res) => {
     try {
         const deletedItem = await Item.findOneAndDelete({_id: req.params.id})
         if (!deletedItem) {
-            response.sendError(res,"item Not Found")
+            res.sendError("item Not Found")
         }
-        response.sendResponse(res,deletedItem)
+       res.sendResponse(deletedItem)
     } catch (error) {
-        response.sendError(res,error)
+        res.sendError(error)
     }
 }

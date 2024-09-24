@@ -16,10 +16,10 @@ exports.register = async (req, res, next) => {
             expiresIn: '3 hour'
         });
         user.token=token;
-        response.sendResponse(res,user,'Registered Successfully');
+       res.sendResponse(user,'Registered Successfully');
 
     } catch (error) {
-        next(error);
+        return  res.sendError('Email already in use.',404);
     }
 };
 
@@ -30,20 +30,20 @@ exports.login = async (req, res, next) => {
     try {
         var user = await User.findOne({ email });
         if (!user) {
-            return  response.sendError(res,'User not found',404);
+            return  res.sendError('User not found',404);
 
         }
 
         const isMatch = await bcrypt.compare(password, user.password)
         if(!isMatch) {
-            return  response.sendError(res,'Incorrect password',401);
+            return  res.sendError('Incorrect password',401);
         }
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
             expiresIn: '3 hour'
         });
          user.token=token;
-          response.sendResponse(res, user,'login',401);
+         res.sendResponse( user,'login',401);
 
     } catch (error) {
         next(error);

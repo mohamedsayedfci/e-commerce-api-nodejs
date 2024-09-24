@@ -1,7 +1,6 @@
 //fetch all items
 // const Auth = require("../middleware/auth");
 const Item = require("../models/Item");
-const response = require("../Helpers/Response");
 
 exports.index = async (req, res) => {
    var items=await Item.find({});

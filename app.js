@@ -6,7 +6,7 @@ const cartRouter = require('./src/routers/api/cart')
 const orderRouter = require('./src/routers/api/order')
 // const webRouter = require('./src/routers/web')
 require('./src/db/mongoose')
-
+const responseEnhancer = require('./src/middleware/response');
 
 
 const port = process.env.PORT||3000
@@ -21,6 +21,7 @@ app.use(express.json())
 const web = express.Router()
 const router = express.Router()
 app.get('/index',homeController.index)
+app.use(responseEnhancer);
 
 // web.use(webRouter)
 //api

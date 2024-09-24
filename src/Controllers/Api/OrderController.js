@@ -5,8 +5,6 @@ const Cart = require("../../models/Cart")
 const User = require("../../models/User")
 const Auth = require("../../middleware/auth")
 
-const response = require("../../Helpers/Response");
-
 
 
 //const flw = new Flutterwave(process.env.FLUTTERWAVE_V3_PUBLIC_KEY, process.env.FLUTTERWAVE_V3_SECRET_KEY)
@@ -21,12 +19,12 @@ exports.index= async (req, res) => {
     try {
         const order = await Order.find({ owner: owner }).sort({ date: -1 });
         if(order) {
-            response.sendResponse(res,order)
+            res.sendError(order)
         }
-        response.sendError(res,'No orders found')
+        res.sendError('No orders found')
 
     } catch (error) {
-        response.sendError(res,'No orders found')
+        res.sendError('No orders found')
     }
 }
 
@@ -69,10 +67,10 @@ exports.checkout= async(req, res) => {
                     })
                     //delete cart
                     const data = await Cart.findByIdAndDelete({_id: cart.id})
-                    response.sendResponse(res,order,"Payment successful")
+                    res.sendError(order,"Payment successful")
 
                 } else {
-                    response.sendError(res,'payment failed',400)
+                    res.sendError('payment failed',400)
 
                 }
             }
@@ -85,12 +83,12 @@ exports.checkout= async(req, res) => {
            // console.log(response)
 
         } else {
-            response.sendError(res,'No cart found',400)
+            res.sendError('No cart found',400)
 
         }
     } catch (error) {
         console.log(error)
-        response.sendError(res,'No cart found',400)
+        res.sendError('No cart found',400)
         
     }
 }
